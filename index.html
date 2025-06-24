@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ATV Teras Interactive Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+  // Initialize map centered approximately on Ayer Keroh
+  const map = L.map('map').setView([2.2665, 102.3075], 17);
+
+  // Base map layer (OpenStreetMap)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Add your image as an overlay (adjust corners if needed)
+  const imageBounds = [[2.2645, 102.3050], [2.2685, 102.3100]]; // Rough fit
+  L.imageOverlay('atv-map.png', imageBounds).addTo(map);
+
+  // Add start/end marker
+  const marker = L.marker([2.2665, 102.3075]).addTo(map)
+    .bindPopup("📍 ATV TERAS Start/End Point")
+    .openPopup();
+</script>
+
+</body>
+</html>
